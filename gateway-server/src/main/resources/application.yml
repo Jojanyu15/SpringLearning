@@ -1,0 +1,20 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: servicio-item
+        uri: lb://servicio-item
+        predicates:
+        - Path=/**   
+      - id: ingredients-fallback
+        uri: http://localhost:9994
+        predicates:
+        - Path=/fallback
+  application:
+    name: gateway-server
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+server:         
+  port: 8090
